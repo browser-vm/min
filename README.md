@@ -38,7 +38,7 @@ npm install
 npm start
 ```
 
-### Docker Deployment
+### Docker Deployment (do not use, in development)
 
 1. Build the Docker image:
 ```bash
