@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Ultraviolet Proxy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #333;
+        }
+        #proxyForm {
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #007BFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Web Unblocker</h1>
+    <form id="proxyForm">
+        <input type="text" id="urlInput" placeholder="Enter URL to unblock" required>
+        <button type="submit">Go</button>
+    </form>
+
+    <script>
+        document.getElementById('proxyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = document.getElementById('urlInput').value;
+            if (url) {
+                try {
+                    const response = await fetch('/generate-proxy-url?url=' + encodeURIComponent(url));
+                    const proxyUrl = await response.text();
+                    window.location.href = proxyUrl;
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
