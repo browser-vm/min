@@ -78,7 +78,7 @@ MIT License
 
 ## Support
 
-For issues or questions, please file a GitHub issue or contact browservm@minproxy.com.
+For issues or questions, please file a GitHub issue or contact browservm@outlook.com.
 
 ---
 
