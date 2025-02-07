@@ -9,6 +9,13 @@ import { hostname } from 'node:os';
 import wisp from 'wisp-server-node';
 
 const app = express();
+
+// Log paths to ensure they are correct
+console.log('publicPath:', publicPath);
+console.log('uvPath:', uvPath);
+console.log('epoxyPath:', epoxyPath);
+console.log('baremuxPath:', baremuxPath);
+
 // Load our publicPath first and prioritize it over UV.
 app.use(express.static(publicPath));
 // Load vendor files last.
