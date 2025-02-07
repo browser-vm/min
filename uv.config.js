@@ -1,12 +1,14 @@
+import Ultraviolet from '@titaniumnetwork-dev/ultraviolet';
+
 const uvConfig = {
     prefix: '/service/',
     bare: '/bare/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
-    handler: '/dist/uv.handler.js',
-    bundle: '/dist/uv.bundle.js',
-    config: '/dist/uv.config.js',
-    sw: '/dist/uv.sw.js',
+    handler: '/uv/uv.handler.js',
+    bundle: '/uv/uv.bundle.js',
+    config: '/uv/uv.config.js',
+    sw: '/uv/uv.sw.js',
 };
 
 export default uvConfig;

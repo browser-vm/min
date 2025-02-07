@@ -7,6 +7,8 @@ import { baremuxPath } from '@mercuryworkshop/bare-mux/node';
 import { join } from 'node:path';
 import { hostname } from 'node:os';
 import wisp from 'wisp-server-node';
+import Ultraviolet from '@titaniumnetwork-dev/ultraviolet';
+import uvConfig from './uv.config.js';
 
 const app = express();
 
@@ -23,6 +25,24 @@ app.use(express.static(publicPath));
 app.use('/uv/', express.static(uvPath));
 app.use('/epoxy/', express.static(epoxyPath));
 app.use('/baremux/', express.static(baremuxPath));
+
+// Configure Ultraviolet
+const uv = new Ultraviolet(uvConfig);
+
+// Generate proxied URL
+app.get('/generate-proxy-url', (req, res) => {
+  const serviceUrl = req.query.url;
+  if (serviceUrl) {
+    const encodedUrl = uv.encodeUrl(serviceUrl);
+    const proxyUrl = `http://${hostname()}:${port}/service/${encodedUrl}`;
+    res.send(proxyUrl);
+  } else {
+    res.status(400).send('No URL provided');
+  }
+});
+
+// Use Ultraviolet middleware
+app.use('/service/', uv.middleware());
 
 // Error for everything else
 app.use((req, res) => {
