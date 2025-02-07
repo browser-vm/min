@@ -1,4 +1,4 @@
-self.__uv$config = {
+const uvConfig = {
     prefix: '/service/',
     bare: '/bare/',
     encodeUrl: Ultraviolet.codec.xor.encode,
@@ -8,3 +8,5 @@ self.__uv$config = {
     config: '/dist/uv.config.js',
     sw: '/dist/uv.sw.js',
 };
+
+export default uvConfig;
