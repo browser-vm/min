@@ -1,6 +1,6 @@
 import express from 'express';
 import { createServer } from 'node:http';
-import { uvPath } from '@titaniumnetwork-dev/ultraviolet';
+import { uvPath } from '@titaniumnetwork-dev/ultraviolet/dist';
 import { join } from 'path';
 import { hostname } from 'os';
 
@@ -27,7 +27,7 @@ app.get('/generate-proxy-url', (req, res) => {
 });
 
 // Ultraviolet handler
-app.use('/service/', (req, res) => {
+app.use('/service/*', (req, res) => {
   const urlToProxy = Buffer.from(req.url.slice(1), 'base64').toString('utf-8');
   req.url = urlToProxy;
   uvPath.requireHandle()(req, res);
