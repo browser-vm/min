@@ -17,9 +17,13 @@
   "author": "Alexander Patrick Scott",
   "license": "MIT",
   "dependencies": {
+    "@mercuryworkshop/bare-mux": "^2.1.7",
+    "@mercuryworkshop/epoxy-transport": "^2.1.27",
     "@titaniumnetwork-dev/ultraviolet": "^1.0.11",
     "entities": "5.0.0",
-    "express": "5.0.1"
+    "express": "^5.0.1",
+    "ultraviolet-static": "^1.0.2",
+    "wisp-server-node": "^1.1.7"
   },
   "devDependencies": {
     "nodemon": "3.0.0"
