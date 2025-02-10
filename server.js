@@ -29,6 +29,10 @@ app.use('/baremux/', express.static(baremuxPath));
 // Configure Ultraviolet
 const uv = new Ultraviolet(uvConfig);
 
+// Initialize port variable
+let port = parseInt(process.env.PORT || '');
+if (isNaN(port)) port = 8080;
+
 // Generate proxied URL
 app.get('/generate-proxy-url', (req, res) => {
   const serviceUrl = req.query.url;
@@ -63,10 +67,6 @@ server.on('upgrade', (req, socket, head) => {
   else
     socket.end();
 });
-
-let port = parseInt(process.env.PORT || '');
-
-if (isNaN(port)) port = 8080;
 
 server.on('listening', () => {
   const address = server.address();
