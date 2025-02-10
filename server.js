@@ -88,8 +88,18 @@ process.on('SIGTERM', shutdown);
 
 function shutdown() {
   console.log('SIGTERM signal received: closing HTTP server');
-  server.close();
-  process.exit(0);
+  server.close(() => {
+    console.log('HTTP server closed');
+    
+    // Set exit code instead of calling exit directly
+    process.exitCode = 0;
+  });
+
+  // Add timeout to force exit if graceful shutdown takes too long
+  setTimeout(() => {
+    console.log('Forcing shutdown after timeout');
+    process.exit(1); 
+  }, 10000).unref();
 }
 
 server.listen({
