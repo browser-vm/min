@@ -88,8 +88,19 @@ process.on('SIGTERM', shutdown);
 
 function shutdown() {
   console.log('SIGTERM signal received: closing HTTP server');
-  server.close();
-  process.exit(0);
+  server.close((err) => {
+    if (err) {
+      console.error('Error during server shutdown:', err);
+      process.exit(1);
+    }
+    console.log('HTTP server closed gracefully');
+    // Here you can close database connections or other resources
+    // db.close(() => {
+    //   console.log('Database connection closed');
+    //   process.exit(0);
+    // });
+    process.exit(0);
+  });
 }
 
 server.listen({
